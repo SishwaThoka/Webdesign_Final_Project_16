@@ -9,7 +9,7 @@ To begin contributing to this project, go through the steps below:
     
 2. Pull / create a new branch with the collaborator's name: 
 
-    > git checkout -b <nameofauthor>-web-submission 
+    > git checkout -b nameofauthor-web-submission 
     
 3. For good practice, do ensure that your branch is up to date with main by merging code locally. 
     > git checkout main  
@@ -19,7 +19,7 @@ To begin contributing to this project, go through the steps below:
     
 4. Always push commits(with relevant description) to your remote branch, before merging with main. If on collaborator branch, simply run:  
     > git pull origin main  
-    > git commit -m "<yourCommitMessageHere>"  
+    > git commit -m "yourCommitMessageHere"  
     > git push  
     
 
