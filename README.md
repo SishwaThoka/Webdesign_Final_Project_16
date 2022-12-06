@@ -16,9 +16,12 @@ To begin contributing to this project, go through the steps below:
     > git pull  
     > git checkout <your_branch>  
     > git merge main  
-    This is equal to running  > git pull origin main 
     
-4. Always push commits(with relevant description) to your remote branch, before merging with main.
+4. Always push commits(with relevant description) to your remote branch, before merging with main. If on collaborator branch, simply run:  
+    > git pull origin main  
+    > git commit -m "<yourCommitMessageHere>"  
+    > git push  
+    
 
 
 # To start the frontend project, run
