@@ -1,4 +1,8 @@
-import { API } from '../../config';
+import { API } from '../config';
+
+/**
+ * @author Rohan Teja
+ */
 
 export const signup = user => {
     return fetch(`${API}/signup`, {
@@ -65,3 +69,4 @@ export const isAuthenticated = () => {
         return false;
     }
 };
+
