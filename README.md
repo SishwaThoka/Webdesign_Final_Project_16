@@ -31,3 +31,12 @@ currently set to start the server on localhost:3000
 
 # To start the backend project, run
 > npm start  
+Shopify is a multipurpose ecommerce app. Users can register and purchase various essentials  from this Website. ​
+
+​
+
+Admin of the Website can create, update and delete the products . He will create  products under different categories.​
+
+​
+
+User can purchase products, add items to their cart and confirm their order by processing payments​
