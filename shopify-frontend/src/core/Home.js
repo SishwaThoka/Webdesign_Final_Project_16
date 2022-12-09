@@ -3,6 +3,7 @@ import Layout from './Layout';
 import { getProducts } from './apiCore';
 import Card from './Card';
 import Search from './Search';
+import { HomeCarousel } from '../components/HomeCarousel';
 
 const Home = () => {
     const [productsBySell, setProductsBySell] = useState([]);
@@ -38,28 +39,28 @@ const Home = () => {
     return (
         <Layout
             caller={"home"}
-            height={"40vh"}
+            height={"30vh"}
             title="Shopify - Products that make your life easy..."
             description="Shop our new christmas deals from 40% to 60% off"
             className="container-fluid"
         >
+            
             <Search />
-            <h2 className="mb-4">New Arrivals</h2>
-            <div className="row">
+            <h2 className="mb-4 p-2">New Arrivals</h2>
+            <div class="card-deck">
                 {productsByArrival.map((product, i) => (
-                    <div key={i} className="col-4 mb-3">
                         <Card product={product} />
-                    </div>
                 ))}
+
             </div>
 
             <h2 className="mb-4">Best Sellers</h2>
-            <div className="row">
+          
+            <div class="card-deck">
                 {productsBySell.map((product, i) => (
-                    <div key={i} className="col-4 mb-3">
                         <Card product={product} />
-                    </div>
                 ))}
+
             </div>
         </Layout>
     );
