@@ -3,6 +3,8 @@ import { Link, Redirect } from 'react-router-dom';
 import ShowImage from './ShowImage';
 import moment from 'moment';
 import { addItem, updateItem, removeItem } from './cartHelpers';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClock, faEye, faPlus, faTag } from '@fortawesome/free-solid-svg-icons'
 
 const Card = ({
   product,
@@ -21,7 +23,10 @@ const Card = ({
     return (
       showViewProductButton && (
         <Link to={`/product/${product._id}`} className="mr-2">
-          <button className="btn btn-outline-primary mt-2 mb-2 card-btn-1">View Product</button>
+          <button className="btn btn-outline-primary mt-2 mb-2 card-btn-1">
+            <FontAwesomeIcon icon={faEye} /> &nbsp;
+
+            View Product</button>
         </Link>
       )
     );
@@ -38,9 +43,22 @@ const Card = ({
   };
 
   const showAddToCartBtn = showAddToCartButton => {
+
+    if (product.quantity <= 0) {
+        return (
+          <button onClick={addToCart} className="btn btn-pink mt-2 mb-2 card-btn-1 disabled">
+              <FontAwesomeIcon icon={faPlus} /> &nbsp;
+
+              Add to cart
+          </button>
+        );
+    }
+
     return (
       showAddToCartButton && (
-        <button onClick={addToCart} className="btn btn-outline-warning mt-2 mb-2 card-btn-1  ">
+        <button onClick={addToCart} className="btn btn-pink mt-2 mb-2 card-btn-1  ">
+          <FontAwesomeIcon icon={faPlus} /> &nbsp;
+
           Add to cart
         </button>
       )
@@ -49,9 +67,9 @@ const Card = ({
 
   const showStock = quantity => {
     return quantity > 0 ? (
-      <span className="badge badge-primary badge-pill">In Stock </span>
+      <span className="badge badge-primary badge-pill rounded">In Stock </span>
     ) : (
-      <span className="badge badge-primary badge-pill">Out of Stock </span>
+      <span className="badge badge-danger badge-pill rounded">Out of Stock </span>
     );
   };
 
@@ -93,15 +111,16 @@ const Card = ({
     );
   };
   return (
-    <div className="card ">
-      <div className="card-header card-header-1 ">{product.name}</div>
+    <div className="card transitionCard mt-2" style={ { minWidth: "18rem"}}>
       <div className="card-body">
         {shouldRedirect(redirect)}
         <ShowImage item={product} url="product" />
-        <p className="card-p  mt-2">{product.description.substring(0, 100)} </p>
-        <p className="card-p black-10">$ {product.price}</p>
-        <p className="black-9">Category: {product.category && product.category.name}</p>
-        <p className="black-8">Added on {moment(product.createdAt).fromNow()}</p>
+        <span className="display-6"><b>{product.name}</b> </span><br/>
+        <span className="">{product.description.substring(0, 100)} </span><br/>
+        <span className="display-6"><b>$ {product.price}</b></span><br/>
+        <span className=""><FontAwesomeIcon icon={faTag} /> {product.category && product.category.name}</span><br/>
+
+
         {showStock(product.quantity)}
         <br />
 
@@ -111,7 +130,15 @@ const Card = ({
 
         {showRemoveButton(showRemoveProductButton)}
 
-        {showCartUpdateOptions(cartUpdate)}
+
+      </div>
+      <div class="card-footer bg-none">
+          {showCartUpdateOptions(cartUpdate)}
+
+         
+         <small class="text-muted">                            
+         <FontAwesomeIcon icon={faClock} /> &nbsp;
+            Added on {moment(product.createdAt).fromNow()}</small>
       </div>
     </div>
   );
