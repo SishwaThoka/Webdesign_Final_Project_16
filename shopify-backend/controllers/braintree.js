@@ -27,6 +27,7 @@ exports.generateToken = (req, res) => {
     });
 };
 
+// 126 Processing payment data we get after user clicks pay, then send response to the frontend
 exports.processPayment = (req, res) => {
     let nonceFromTheClient = req.body.paymentMethodNonce;
     let amountFromTheClient = req.body.amount;

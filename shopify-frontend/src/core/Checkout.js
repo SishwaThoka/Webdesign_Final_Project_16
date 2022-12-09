@@ -114,7 +114,7 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
                             });
                     })
                     .catch(error => {
-                        console.log(error);
+                        console.log(error); // Set loading to false so that we dont load page in case of error
                         setData({ loading: false });
                     });
             })
@@ -141,6 +141,7 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
                     <DropIn
                         options={{
                             authorization: data.clientToken,
+                            // Initialise paypal
                             paypal: {
                                 flow: 'vault'
                             }

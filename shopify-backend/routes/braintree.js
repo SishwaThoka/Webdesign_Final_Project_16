@@ -12,6 +12,8 @@ const { generateToken, processPayment } = require("../controllers/braintree");
 
 // Returns generated Token for client side
 router.get("/braintree/getToken/:userId", requireSignin, isAuth, generateToken);
+
+// Posting payment data after signin and authentication to braintree controller
 router.post(
     "/braintree/payment/:userId",
     requireSignin,
