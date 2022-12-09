@@ -21,7 +21,7 @@ const Cart = () => {
 
     useEffect(() => {
 
-        if (items.length > 0) {
+        if (items.length === 3) {
             setTimeout(sendEmailToUser, 5000);
         }
         
@@ -30,7 +30,23 @@ const Cart = () => {
     const sendEmailToUser = () => {
         console.log('5 seconds completed sending email to user');
 
-        sendEmail(items, addToCartTemplateId);
+        let sum  = 0;
+        items.forEach((item) => sum+=(item.price*items.quantity) )
+        const itemDetails = {
+            "item_1_name": items[0].name || "",
+            "item_2_name": items[1].name || "",
+            "item_3_name": items[2].name || "",
+            "item_1_price": items[0].price || 0,
+            "item_2_price": items[1].price || 0,
+            "item_3_price": items[2].price || 0,
+            "item_1_quantity": items[0].quantity || 0,
+            "item_2_quantity": items[1].quantity || 0,
+            "item_3_quantity": items[2].quantity || 0,
+            "total_price": sum
+
+        };
+
+        sendEmail(itemDetails, addToCartTemplateId);
 
     };
 

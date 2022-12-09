@@ -132,11 +132,11 @@ const Card = ({
 
 
       </div>
-      <div class="card-footer bg-none">
+      <div className="card-footer bg-none">
           {showCartUpdateOptions(cartUpdate)}
 
          
-         <small class="text-muted">                            
+         <small className="text-muted">                            
          <FontAwesomeIcon icon={faClock} /> &nbsp;
             Added on {moment(product.createdAt).fromNow()}</small>
       </div>

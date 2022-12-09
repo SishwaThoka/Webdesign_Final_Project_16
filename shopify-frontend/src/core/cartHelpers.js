@@ -95,6 +95,6 @@ export const emptyCart = next => {
 
 export const getUsername  = () => {
 
-    return localStorage.getItem('jwt').user.email;
+    return JSON.parse(localStorage.getItem('jwt')).user.email;
 
 }
