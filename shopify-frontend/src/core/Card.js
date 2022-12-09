@@ -49,9 +49,9 @@ const Card = ({
 
   const showStock = quantity => {
     return quantity > 0 ? (
-      <span className="badge badge-primary badge-pill">In Stock </span>
+      <span className="badge badge-primary badge-pill rounded">In Stock </span>
     ) : (
-      <span className="badge badge-primary badge-pill">Out of Stock </span>
+      <span className="badge badge-primary badge-pill rounded">Out of Stock </span>
     );
   };
 
@@ -93,15 +93,17 @@ const Card = ({
     );
   };
   return (
-    <div className="card ">
-      <div className="card-header card-header-1 ">{product.name}</div>
+    <div className="card transitionCard" style={ { minWidth: "18rem"}}>
       <div className="card-body">
         {shouldRedirect(redirect)}
         <ShowImage item={product} url="product" />
-        <p className="card-p  mt-2">{product.description.substring(0, 100)} </p>
-        <p className="card-p black-10">$ {product.price}</p>
-        <p className="black-9">Category: {product.category && product.category.name}</p>
-        <p className="black-8">Added on {moment(product.createdAt).fromNow()}</p>
+        <span className="display-6"><b>{product.name}</b> </span><br/>
+        <span className="">{product.description.substring(0, 100)} </span><br/>
+        <span className="display-6"><b>$ {product.price}</b></span><br/>
+        <span className="">Category: {product.category && product.category.name}</span><br/>
+
+        <p class="card-text"><small class="text-muted">Added on {moment(product.createdAt).fromNow()}</small></p>
+
         {showStock(product.quantity)}
         <br />
 
@@ -112,6 +114,7 @@ const Card = ({
         {showRemoveButton(showRemoveProductButton)}
 
         {showCartUpdateOptions(cartUpdate)}
+
       </div>
     </div>
   );
