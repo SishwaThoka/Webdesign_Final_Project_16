@@ -10,8 +10,8 @@ const {
     signin,
     signout,
     requireSignin
-} = require("../../../../react-node-ecommerce/final-code-with-improvments/ecommerce/controllers/auth");
-const { userSignupValidator } = require("../../../../react-node-ecommerce/final-code-with-improvments/ecommerce/validator");
+} = require("../controllers/auth");
+const { userSignupValidator } = require("../validator");
 
 router.post("/signup", userSignupValidator, signup);
 router.post("/signin", signin);
