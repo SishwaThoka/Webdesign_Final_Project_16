@@ -29,3 +29,5 @@ To begin contributing to this project, go through the steps below:
     
 currently set to start the server on localhost:3000
 
+# To start the backend project, run
+> npm start  
