@@ -6,11 +6,12 @@ const Layout = ({
     title = "Title",
     description = "Description",
     className,
+    height,
     children
 }) => (
     <div>
 
-        <div className="shopify-jumbotron">
+        <div style={{height: height}} className="shopify-jumbotron">
 
             <div className="row">
                 <div className="col-12">

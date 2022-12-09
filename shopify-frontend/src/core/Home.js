@@ -37,8 +37,10 @@ const Home = () => {
 
     return (
         <Layout
-            title="FullStack React Node MongoDB Ecommerce App"
-            description="Node React E-commerce App"
+            caller={"home"}
+            height={"40vh"}
+            title="Shopify - Products that make your life easy..."
+            description="Shop our new christmas deals from 40% to 60% off"
             className="container-fluid"
         >
             <Search />
