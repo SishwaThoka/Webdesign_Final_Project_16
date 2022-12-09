@@ -4,16 +4,42 @@ import Layout from './Layout';
 import { getCart } from './cartHelpers';
 import Card from './Card';
 import Checkout from './Checkout';
+import { sendEmail } from '../service/EmailService';
+import { addToCartTemplateId } from '../utils/utils';
 
 const Cart = () => {
+    const [sentEmail, setSentEmail] = useState(false);
     const [items, setItems] = useState([]);
+    const [itemsLength, setItemsLength] = useState([]);
+
     const [run, setRun] = useState(false);
 
     useEffect(() => {
         setItems(getCart());
+        setItemsLength(getCart().length);
     }, [run]);
 
+    useEffect(() => {
+
+        if (items.length > 0) {
+            setTimeout(sendEmailToUser, 5000);
+        }
+        
+    }, [itemsLength]);
+
+    const sendEmailToUser = () => {
+        console.log('5 seconds completed sending email to user');
+
+        sendEmail(items, addToCartTemplateId);
+
+    };
+
+
+
     const showItems = items => {
+        
+
+
         return (
             <div>
                 <h2>Your cart has {`${items.length}`} items</h2>

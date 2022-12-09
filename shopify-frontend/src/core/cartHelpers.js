@@ -91,3 +91,10 @@ export const emptyCart = next => {
         next();
     }
 };
+
+
+export const getUsername  = () => {
+
+    return localStorage.getItem('jwt').user.email;
+
+}
