@@ -4,6 +4,10 @@ import { isAuthenticated } from '../auth';
 import { Link } from 'react-router-dom';
 import { createProduct, getCategories } from './apiAdmin';
 
+/**
+ * @author Rohan Teja
+ */
+
 const AddProduct = () => {
     const [values, setValues] = useState({
         name: '',
