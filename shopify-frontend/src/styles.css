@@ -1,6 +1,9 @@
 /**
  * border radius
  */
+ * {
+    font-family: 'Josefin Sans', sans-serif !important;   
+  }
 
 .btn,
 .shopify-jumbotron,
@@ -117,5 +120,18 @@
 }
 
 .shopify-header {
-    color: #ff9900 !important
+    color: #ff9900 !important;
+    font-size: 3rem !important;
+    display: flex;
+    align-items: center;
 }
+
+.border-right-divider {
+    border-right: 1px solid lightgray;
+    border-radius: 2px;
+}
+.border-right-divider:hover {
+
+    transform: scale(1.1);
+    transition: 0.5s;
+  }
