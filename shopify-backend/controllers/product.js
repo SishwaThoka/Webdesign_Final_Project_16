@@ -93,8 +93,7 @@ exports.update = (req, res) => {
         let product = req.product;
         product = _.extend(product, fields);
 
-        // 1kb = 1000
-        // 1mb = 1000000
+
 
         if (files.photo) {
             // console.log("FILES PHOTO: ", files.photo);
