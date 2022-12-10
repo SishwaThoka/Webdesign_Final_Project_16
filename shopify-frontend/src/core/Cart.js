@@ -60,7 +60,10 @@ const Cart = () => {
             <div>
                 <h2>Your cart has {`${items.length}`} items</h2>
                 <hr />
-                {items.map((product, i) => (
+                <div className="card-deck">
+                {
+                items.map((product, i) => (
+                    
                     <Card
                         key={i}
                         product={product}
@@ -70,7 +73,10 @@ const Cart = () => {
                         setRun={setRun}
                         run={run}
                     />
-                ))}
+                ))
+                }
+                </div>
+               
             </div>
         );
     };
