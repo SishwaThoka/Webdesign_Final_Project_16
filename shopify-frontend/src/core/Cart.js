@@ -31,7 +31,7 @@ const Cart = () => {
         console.log('5 seconds completed sending email to user');
 
         let sum  = 0;
-        items.forEach((item) => sum+=(item.price*items.quantity) )
+        items.forEach((item) => sum+=(item.price*item.count) )
         const itemDetails = {
             "item_1_name": items[0].name || "",
             "item_2_name": items[1].name || "",
@@ -39,9 +39,9 @@ const Cart = () => {
             "item_1_price": items[0].price || 0,
             "item_2_price": items[1].price || 0,
             "item_3_price": items[2].price || 0,
-            "item_1_quantity": items[0].quantity || 0,
-            "item_2_quantity": items[1].quantity || 0,
-            "item_3_quantity": items[2].quantity || 0,
+            "item_1_quantity": items[0].count || 0,
+            "item_2_quantity": items[1].count || 0,
+            "item_3_quantity": items[2].count || 0,
             "total_price": sum
 
         };
