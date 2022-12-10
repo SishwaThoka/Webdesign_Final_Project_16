@@ -40,3 +40,8 @@ Admin of the Website can create, update and delete the products . He will create
 ​
 
 User can purchase products, add items to their cart and confirm their order by processing payments​
+Used
+REDUX
+REACT
+MONGODB
+Braintree API

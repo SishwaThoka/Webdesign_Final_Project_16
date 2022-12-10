@@ -9,7 +9,7 @@ exports.userSignupValidator = (req, res, next) => {
         .withMessage('Email must contain @')
         .isLength({
             min: 4,
-            max: 32
+            max: 36
         });
     req.check('password', 'Password is required').notEmpty();
     req.check('password')

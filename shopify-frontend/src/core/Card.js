@@ -4,7 +4,7 @@ import ShowImage from './ShowImage';
 import moment from 'moment';
 import { addItem, updateItem, removeItem } from './cartHelpers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faClock, faEye, faPlus, faTag } from '@fortawesome/free-solid-svg-icons'
+import { faClock, faEye, faPlus, faTag, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 
 const Card = ({
   product,
@@ -73,6 +73,14 @@ const Card = ({
     );
   };
 
+  const showHurryUp = quantity => {
+    return quantity < 10  ? (
+      <span className="badge badge-danger badge-pill rounded">
+        <FontAwesomeIcon icon={faExclamationTriangle} />
+        Getting out of stock soon..Hurry up! </span>
+    ) : null;
+  };
+
   const handleChange = productId => event => {
     setRun(!run); // run useEffect in parent Cart
     setCount(event.target.value < 1 ? 1 : event.target.value);
@@ -111,17 +119,19 @@ const Card = ({
     );
   };
   return (
-    <div className="card transitionCard mt-2" style={ { minWidth: "18rem"}}>
+    <div className="card transitionCard mt-2" style={{ minWidth: "18rem", maxWidth: "30rem"}}>
       <div className="card-body">
         {shouldRedirect(redirect)}
         <ShowImage item={product} url="product" />
-        <span className="display-6"><b>{product.name}</b> </span><br/>
+        <span className="font-one"><b>{product.name}</b> </span><br/>
         <span className="">{product.description.substring(0, 100)} </span><br/>
-        <span className="display-6"><b>$ {product.price}</b></span><br/>
+        <span className="font-two"><b>$ {product.price}</b></span><br/>
         <span className=""><FontAwesomeIcon icon={faTag} /> {product.category && product.category.name}</span><br/>
 
 
         {showStock(product.quantity)}
+        <br />
+        {showHurryUp(product.quantity)}
         <br />
 
         {showViewButton(showViewProductButton)}
@@ -132,11 +142,11 @@ const Card = ({
 
 
       </div>
-      <div class="card-footer bg-none">
+      <div className="card-footer bg-none">
           {showCartUpdateOptions(cartUpdate)}
 
          
-         <small class="text-muted">                            
+         <small className="text-muted">                            
          <FontAwesomeIcon icon={faClock} /> &nbsp;
             Added on {moment(product.createdAt).fromNow()}</small>
       </div>
