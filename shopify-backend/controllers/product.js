@@ -32,7 +32,7 @@ exports.create = (req, res) => {
                 error: 'Image could not be uploaded'
             });
         }
-       
+        // check for all fields
         const { name, description, price, category, quantity, shipping } = fields;
 
         if (!name || !description || !price || !category || !quantity || !shipping) {
@@ -43,8 +43,11 @@ exports.create = (req, res) => {
 
         let product = new Product(fields);
 
+        // 1kb = 1000
+        // 1mb = 1000000
+
         if (files.photo) {
-           
+            // console.log("FILES PHOTO: ", files.photo);
             if (files.photo.size > 1000000) {
                 return res.status(400).json({
                     error: 'Image should be less than 1mb in size'
@@ -66,6 +69,19 @@ exports.create = (req, res) => {
     });
 };
 
+exports.remove = (req, res) => {
+    let product = req.product;
+    product.remove((err, deletedProduct) => {
+        if (err) {
+            return res.status(400).json({
+                error: errorHandler(err)
+            });
+        }
+        res.json({
+            message: 'Product deleted successfully'
+        });
+    });
+};
 
 exports.update = (req, res) => {
     let form = new formidable.IncomingForm();
@@ -80,7 +96,8 @@ exports.update = (req, res) => {
         let product = req.product;
         product = _.extend(product, fields);
 
-
+        // 1kb = 1000
+        // 1mb = 1000000
 
         if (files.photo) {
             // console.log("FILES PHOTO: ", files.photo);
@@ -104,6 +121,12 @@ exports.update = (req, res) => {
     });
 };
 
+/**
+ * sell / arrival
+ * by sell = /products?sortBy=sold&order=desc&limit=4
+ * by arrival = /products?sortBy=createdAt&order=desc&limit=4
+ * if no params are sent, then all products are returned
+ */
 
 exports.list = (req, res) => {
     let order = req.query.order ? req.query.order : 'asc';
@@ -209,6 +232,14 @@ exports.listBySearch = (req, res) => {
         });
 };
 
+exports.photo = (req, res, next) => {
+    if (req.product.photo.data) {
+        res.set('Content-Type', req.product.photo.contentType);
+        return res.send(req.product.photo.data);
+    }
+    next();
+};
+
 exports.listSearch = (req, res) => {
     // create query object to hold search value and category value
     const query = {};
@@ -250,26 +281,4 @@ exports.decreaseQuantity = (req, res, next) => {
         }
         next();
     });
-};
-
-exports.remove = (req, res) => {
-    let product = req.product;
-    product.remove((err, deletedProduct) => {
-        if (err) {
-            return res.status(400).json({
-                error: errorHandler(err)
-            });
-        }
-        res.json({
-            message: 'Product deleted successfully'
-        });
-    });
-};
-
-exports.photo = (req, res, next) => {
-    if (req.product.photo.data) {
-        res.set('Content-Type', req.product.photo.contentType);
-        return res.send(req.product.photo.data);
-    }
-    next();
 };
