@@ -92,3 +92,10 @@ export const emptyCart = next => {
         next();
     }
 };
+
+
+export const getUsername  = () => {
+
+    return JSON.parse(localStorage.getItem('jwt')).user.email;
+
+}
