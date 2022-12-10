@@ -1,12 +1,12 @@
-const User = require('../models/user');
+const Users = require('../models/user');
 const { Order } = require('../models/order');
 const { errorHandler } = require('../helpers/dbErrorHandler');
 
 exports.userById = (req, res, next, id) => {
-    User.findById(id).exec((err, user) => {
+    Users.findById(id).exec((err, user) => {
         if (err || !user) {
             return res.status(400).json({
-                error: 'User not found'
+                error: 'Users not found'
             });
         }
         req.profile = user;
@@ -20,29 +20,13 @@ exports.read = (req, res) => {
     return res.json(req.profile);
 };
 
-// exports.update = (req, res) => {
-//     console.log('user update', req.body);
-//     req.body.role = 0; // role will always be 0
-//     User.findOneAndUpdate({ _id: req.profile._id }, { $set: req.body }, { new: true }, (err, user) => {
-//         if (err) {
-//             return res.status(400).json({
-//                 error: 'You are not authorized to perform this action'
-//             });
-//         }
-//         user.hashed_password = undefined;
-//         user.salt = undefined;
-//         res.json(user);
-//     });
-// };
-
 exports.update = (req, res) => {
-    // console.log('UPDATE USER - req.user', req.user, 'UPDATE DATA', req.body);
     const { name, password } = req.body;
 
-    User.findOne({ _id: req.profile._id }, (err, user) => {
+    Users.findOne({ _id: req.profile._id }, (err, user) => {
         if (err || !user) {
             return res.status(400).json({
-                error: 'User not found'
+                error: 'Users not found'
             });
         }
         if (!name) {
@@ -63,21 +47,21 @@ exports.update = (req, res) => {
             }
         }
 
-        user.save((err, updatedUser) => {
+        user.save((err, updatedUsers) => {
             if (err) {
                 console.log('USER UPDATE ERROR', err);
                 return res.status(400).json({
-                    error: 'User update failed'
+                    error: 'Users update failed'
                 });
             }
-            updatedUser.hashed_password = undefined;
-            updatedUser.salt = undefined;
-            res.json(updatedUser);
+            updatedUsers.hashed_password = undefined;
+            updatedUsers.salt = undefined;
+            res.json(updatedUsers);
         });
     });
 };
 
-exports.addOrderToUserHistory = (req, res, next) => {
+exports.addOrderToUsersHistory = (req, res, next) => {
     let history = [];
 
     req.body.order.products.forEach(item => {
@@ -92,7 +76,7 @@ exports.addOrderToUserHistory = (req, res, next) => {
         });
     });
 
-    User.findOneAndUpdate({ _id: req.profile._id }, { $push: { history: history } }, { new: true }, (error, data) => {
+    Users.findOneAndUpdate({ _id: req.profile._id }, { $push: { history: history } }, { new: true }, (error, data) => {
         if (error) {
             return res.status(400).json({
                 error: 'Could not update user purchase history'
