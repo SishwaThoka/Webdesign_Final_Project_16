@@ -52,8 +52,8 @@ exports.create = (req, res) => {
             <p>Login to dashboard to the order in detail.</p>
         `
         };
-        sgMail.send(emailData);
-        console.log('email sent data is ', emailData);
+        // sgMail.send(emailData);
+        // console.log('email sent data is ', emailData);
         res.json(data);
     });
 };
