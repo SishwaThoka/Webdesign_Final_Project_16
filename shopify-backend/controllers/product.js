@@ -32,7 +32,7 @@ exports.create = (req, res) => {
                 error: 'Image could not be uploaded'
             });
         }
-        // check for all fields
+       
         const { name, description, price, category, quantity, shipping } = fields;
 
         if (!name || !description || !price || !category || !quantity || !shipping) {
@@ -43,11 +43,8 @@ exports.create = (req, res) => {
 
         let product = new Product(fields);
 
-        // 1kb = 1000
-        // 1mb = 1000000
-
         if (files.photo) {
-            // console.log("FILES PHOTO: ", files.photo);
+           
             if (files.photo.size > 1000000) {
                 return res.status(400).json({
                     error: 'Image should be less than 1mb in size'
