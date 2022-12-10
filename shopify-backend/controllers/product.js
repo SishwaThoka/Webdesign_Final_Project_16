@@ -66,19 +66,6 @@ exports.create = (req, res) => {
     });
 };
 
-exports.remove = (req, res) => {
-    let product = req.product;
-    product.remove((err, deletedProduct) => {
-        if (err) {
-            return res.status(400).json({
-                error: errorHandler(err)
-            });
-        }
-        res.json({
-            message: 'Product deleted successfully'
-        });
-    });
-};
 
 exports.update = (req, res) => {
     let form = new formidable.IncomingForm();
@@ -117,12 +104,6 @@ exports.update = (req, res) => {
     });
 };
 
-/**
- * sell / arrival
- * by sell = /products?sortBy=sold&order=desc&limit=4
- * by arrival = /products?sortBy=createdAt&order=desc&limit=4
- * if no params are sent, then all products are returned
- */
 
 exports.list = (req, res) => {
     let order = req.query.order ? req.query.order : 'asc';
@@ -276,5 +257,19 @@ exports.decreaseQuantity = (req, res, next) => {
             });
         }
         next();
+    });
+};
+
+exports.remove = (req, res) => {
+    let product = req.product;
+    product.remove((err, deletedProduct) => {
+        if (err) {
+            return res.status(400).json({
+                error: errorHandler(err)
+            });
+        }
+        res.json({
+            message: 'Product deleted successfully'
+        });
     });
 };
