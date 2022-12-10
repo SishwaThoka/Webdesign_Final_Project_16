@@ -3,10 +3,11 @@ import { Redirect } from "react-router-dom";
 import Layout from "../core/Layout";
 import { signin, authenticate, isAuthenticated } from "../auth";
 
+
 const Signin = () => {
     const [values, setValues] = useState({
-        email: "ryan@gmail.com",
-        password: "rrrrrr9",
+        email: "blastoise@gmail.com",
+        password: "Pikachu1",
         error: "",
         loading: false,
         redirectToReferrer: false
