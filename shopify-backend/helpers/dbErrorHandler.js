@@ -3,7 +3,7 @@
 /**
  * Get unique error field name
  */
-const uniqueMessage = error => {
+const uniqueMsg = error => {
     let output;
     try {
         let fieldName = error.message.substring(
@@ -31,7 +31,7 @@ exports.errorHandler = error => {
         switch (error.code) {
             case 11000:
             case 11001:
-                message = uniqueMessage(error);
+                message = uniqueMsg(error);
                 break;
             default:
                 message = "Something went wrong";

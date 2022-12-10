@@ -209,14 +209,6 @@ exports.listBySearch = (req, res) => {
         });
 };
 
-exports.photo = (req, res, next) => {
-    if (req.product.photo.data) {
-        res.set('Content-Type', req.product.photo.contentType);
-        return res.send(req.product.photo.data);
-    }
-    next();
-};
-
 exports.listSearch = (req, res) => {
     // create query object to hold search value and category value
     const query = {};
@@ -272,4 +264,12 @@ exports.remove = (req, res) => {
             message: 'Product deleted successfully'
         });
     });
+};
+
+exports.photo = (req, res, next) => {
+    if (req.product.photo.data) {
+        res.set('Content-Type', req.product.photo.contentType);
+        return res.send(req.product.photo.data);
+    }
+    next();
 };
