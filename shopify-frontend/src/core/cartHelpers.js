@@ -85,6 +85,7 @@ export const removeItem = productId => {
     return cart;
 };
 
+// Empty cart function for successfull payment used in checkout
 export const emptyCart = next => {
     if (typeof window !== 'undefined') {
         localStorage.removeItem('cart');

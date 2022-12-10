@@ -1,1 +1,0 @@
-- npm i braintree-web-drop-in-react

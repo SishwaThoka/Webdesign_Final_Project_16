@@ -7,7 +7,7 @@ const { errorHandler } = require('../helpers/dbErrorHandler');
 
 // sendgrid for email npm i @sendgrid/mail
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey('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');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 exports.orderById = (req, res, next, id) => {
     Order.findById(id)
@@ -25,6 +25,7 @@ exports.orderById = (req, res, next, id) => {
 
 exports.create = (req, res) => {
     console.log('CREATE ORDER: ', req.body);
+    let custName = "Rohan Teja";
     req.body.order.user = req.profile;
     const order = new Order(req.body.order);
     order.save((error, data) => {
@@ -37,18 +38,22 @@ exports.create = (req, res) => {
         // order.address
         // order.products.length
         // order.amount
+        // console.log('order is ', order);
+
+        // Temp hardcode recipient for presentation
         const emailData = {
-            to: 'kaloraat@gmail.com',
-            from: 'noreply@ecommerce.com',
-            subject: `A new order is received`,
+            to: 'veeramachaneni.r@northeastern.edu',
+            from: process.env.SENDGRID_EMAIL,
+            subject: `Shopify has recieved your order!`,
             html: `
-            <p>Customer name:</p>
+            <p>Customer name: ${custName}</p>
             <p>Total products: ${order.products.length}</p>
             <p>Total cost: ${order.amount}</p>
             <p>Login to dashboard to the order in detail.</p>
         `
         };
         sgMail.send(emailData);
+        // console.log('email sent data is ', emailData);
         res.json(data);
     });
 };
