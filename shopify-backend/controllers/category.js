@@ -1,12 +1,12 @@
-const Category = require('../models/category');
+const ProductCategory = require('../models/category');
 const Product = require('../models/product');
 const { errorHandler } = require('../helpers/dbErrorHandler');
 
 exports.categoryById = (req, res, next, id) => {
-    Category.findById(id).exec((err, category) => {
+    ProductCategory.findById(id).exec((err, category) => {
         if (err || !category) {
             return res.status(400).json({
-                error: 'Category does not exist'
+                error: 'ProductCategory does not exist'
             });
         }
         req.category = category;
@@ -15,7 +15,7 @@ exports.categoryById = (req, res, next, id) => {
 };
 
 exports.list = (req, res) => {
-    Category.find().exec((err, data) => {
+    ProductCategory.find().exec((err, data) => {
         if (err) {
             return res.status(400).json({
                 error: errorHandler(err)
@@ -26,7 +26,7 @@ exports.list = (req, res) => {
 };
 
 exports.create = (req, res) => {
-    const category = new Category(req.body);
+    const category = new ProductCategory(req.body);
     category.save((err, data) => {
         if (err) {
             return res.status(400).json({
@@ -72,7 +72,7 @@ exports.remove = (req, res) => {
                     });
                 }
                 res.json({
-                    message: 'Category deleted'
+                    message: 'ProductCategory deleted'
                 });
             });
         }
